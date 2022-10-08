@@ -3,6 +3,7 @@
 
 <head>
     <title>L’Escalier International City of Peace</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   
@@ -11,7 +12,7 @@
   <script>
       apicall();
     function apicall(){
-        console.log("IN");
+        console.log("IN..");
     $.ajax({
             type: "POST",
             url: "http://141.147.15.204/mmdesk/user.php",
