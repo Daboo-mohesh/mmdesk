@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <title>L’Escalier International City of Peace</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  
+  
+  
+  <script>
+    function apicall(){
+    $.ajax({
+            type: "POST",
+            url: "http://141.147.15.204/mmdesk/user.php",
+            data: {
+                op: "select",
+                id: "13654"
+            },
+            success: function(res) {
+                var response = JSON.parse(res);
+                /*var data = "";
+                if (response != "0") {
+                for (var i = 0; i < response.length; i++) {
+                     var imgsrc = "";
+                                    if (response[i]["m_content"] == null) {
+                                        imgsrc = "images/noimage.png";
+                                    } else {
+                                        imgsrc = response[i]["m_content"];
+
+                                    }
+                    console.log(response[i]["m_date"], response[i]["m_title"]);
+                    data += "<div class='col-xl-4 col-md-6 col-sm-12'><div class='card'><div class='card-content'><img src='" + imgsrc + "' class='card-img-top img-fluid' style='height:250px;' alt='singleminded'><div class='card-body'><h5 class='card-title'>" + response[i]["m_title"] + "</h5><p class='card-text'>Date: " + response[i]["m_date"] + "</p><br/><button type='submit' id='btnUpdate' onclick='UpdateModal(" + response[i]["m_id"] + ");' class='btn btn-warning btn-block'>Update</button><br/><button type='submit' id='btnDelete' class='btn btn-danger btn-block' style='margin-top:2%;' onclick=DeleteArticle(" + response[i]["m_id"] + ");>Delete</button></div></div></div></div>";
+                }
+                document.getElementById('articles').innerHTML = data;
+                }else{
+                    document.getElementById('articles').innerHTML = '';
+                }*/
+            },
+            error: function(xhr, status, error) {
+                /*$('.loaderr').css('visibility', 'hidden');
+                toastr.error('Something went wrong!');*/
+                console.log(xhr.responseText);
+            }
+        });
+      }
+  </script>
+</html>
