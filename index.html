@@ -9,7 +9,34 @@
   
     <body>
         <h1>TEST</h1>
-  <script>
+       <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
+        
+        
+        
+        
+        
+        
+        <script type='text/javascript'>
+  function encodeImageFileAsURL() {
+
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0) {
+      var fileToLoad = filesSelected[0];
+
+      var fileReader = new FileReader();
+
+      fileReader.onload = function(fileLoadedEvent) {
+        var srcData = fileLoadedEvent.target.result; // <--- data: base64
+          
+          console.log(srcData);
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+</script>
+        
+        
+  /*<script>
       apicall();
     function apicall(){
         console.log("IN..");
@@ -48,6 +75,6 @@
             }
         });
       }
-  </script>
+  </script>*/
         </body>
 </html>
