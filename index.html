@@ -8,7 +8,7 @@
   </head>
   
     <body>
-        <h1>TEST 3</h1>
+        <h1>TEST 4</h1>
        <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
         
         
@@ -23,13 +23,14 @@
         if (filesSelected.length > 0) {
           var fileToLoad = filesSelected[0];
             
+            console.log(fileToLoad);
+            
           var fileReader = new FileReader();
 
           fileReader.onload = function(fileLoadedEvent) {
             var srcData = fileLoadedEvent.target.result; // <--- data: base64
-            //var name = fileLoadedEvent.target.name;
-              
-              //console.log(name, srcData);
+
+            console.log(name, srcData);
           }
           fileReader.readAsDataURL(fileLoadedEvent);
         }
