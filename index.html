@@ -18,17 +18,19 @@
         
     <script type='text/javascript'>
       function encodeImageFileAsURL() {
-
+         var name = "";
+         var srcData = "";
+         
         var filesSelected = document.getElementById("inputFileToLoad").files;
         if (filesSelected.length > 0) {
           var fileToLoad = filesSelected[0];
             
-            console.log(fileToLoad);
+            name = fileToLoad.name;
             
           var fileReader = new FileReader();
 
           fileReader.onload = function(fileLoadedEvent) {
-            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            srcData = fileLoadedEvent.target.result; // <--- data: base64
 
             console.log(name, srcData);
           }
