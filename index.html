@@ -1,43 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Trial</title>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
-  
-    <body>
-        <h1>TEST 5</h1>
-       <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
-        
-        
-        
-        
-        
-        
-    <script type='text/javascript'>
-      function encodeImageFileAsURL() {
-         var name = "";
-         var srcData = "";
-         
+
+  <body>
+    <h1>TEST 6</h1>
+    <input
+      id="inputFileToLoad"
+      type="file"
+      multiple
+      onchange="encodeImageFileAsURL();"
+    />
+
+    <img src="http://localhost:65457/business/imagehandler.ashx?filename=202302172253149790gecxn1mnf.png" />
+
+    <script type="text/javascript">
+      async function encodeImageFileAsURL() {
         var filesSelected = document.getElementById("inputFileToLoad").files;
         if (filesSelected.length > 0) {
-          var fileToLoad = filesSelected[0];
-            
-            name = fileToLoad.name;
-            
+          var Image_Arr = await ConvertImage(filesSelected);
+          console.log(Image_Arr);
+
+          const myTimeout = setTimeout(function () {
+            submitImages(Image_Arr);
+          }, filesSelected.length * 1000);
+        }
+      }
+
+      function ConvertImage(filesSelected) {
+        var name = "";
+        var srcData = "";
+        var ImgArr = new Array();
+
+        for (var i = 0; i < filesSelected.length; i++) {
+          var fileToLoad = filesSelected[i];
+
+          name = fileToLoad.name;
+
           var fileReader = new FileReader();
 
-          fileReader.onload = function(fileLoadedEvent) {
+          fileReader.onload = function (fileLoadedEvent) {
             srcData = fileLoadedEvent.target.result; // <--- data: base64
 
-            console.log(name, srcData);
-          }
+            ImgArr.push({ filename: name, base64: srcData.split(',')[1] });
+          };
           fileReader.readAsDataURL(fileToLoad);
+        }
+
+        return ImgArr;
+      }
+
+      function submitImages(arr) {
+        if (arr.length > 0) {
+          console.log(JSON.stringify(arr));
+
+          $.ajax({
+            type: "POST",
+            url: "http://localhost:65457/api/Customer/AddImage",
+            data: {
+              "": arr,
+            },
+            success: function (res) {
+              console.log(res);
+            },
+          });
+        } else {
+          console.log(arr.length);
         }
       }
     </script>
-        
-</body>
+  </body>
 </html>
